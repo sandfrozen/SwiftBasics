@@ -50,3 +50,22 @@ if let townPlan = makeTownGrandSec(budget: 10001, condition: evaluateBudget) {
 }
 
 print("Miasto ma \(stopLights) skrzyżowań ze światłami.")
+
+// FUNKCJE WYŻSZEGO RZĘDU
+// map(_:)
+
+let precinctPopulations = [1244, 2021, 2157]
+//let projectedPopulations = precinctPopulations.map{
+//    (population: Int) -> Int in
+//    return population * 2
+//}
+let projectedPopulations = precinctPopulations.map{ $0 * 2 }
+projectedPopulations
+
+// filter(_:)
+let bigProjections = projectedPopulations.filter{ $0 > 4000 }
+bigProjections
+
+// reduce(_:combine:)
+let totalProjetcion = projectedPopulations.reduce(0) { $0 + $1 }
+totalProjetcion
