@@ -79,11 +79,9 @@ print("Liczby parzyste: \(theSortedNumbers.evens); liczby nieparzyste: \(theSort
 
 func giveSomeValues() -> (a: [Int], b: [Int], c: [Int], d: [Int]){
     var a = [Int]()
-    var b = [Int]()
-    var c = [Int]()
-    var d = [Int]()
+    a.append(1)
     
-    return (a, b, c, d)
+    return (a, a, a, a)
 }
 
 
@@ -103,7 +101,7 @@ func grabByMiddleName(name: (first: String, middle: String?, last: String)) {
         print("Witaj!")
         return
     }
-    print("\(name.middle!), witaj!")
+    print("\(middleName), witaj!")
 }
 grabByMiddleName(name: (first: "Tomek", middle: "Frozen", last: "Busłowski"))
 
