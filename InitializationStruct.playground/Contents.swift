@@ -11,14 +11,18 @@ struct Town {
     }
     var numberOfStoplights: Int
     
-    
-    init(region: String, population: Int, stoplights: Int) {
+    // Metoda inicjalizacyjna która może zakończyć sie niepowodzeniem
+    // bez '?' nie należy zwracać nil
+    init?(region: String, population: Int, stoplights: Int) {
+        if population <= 0 {
+            return nil
+        }
         self.region = region
         self.population = population
         self.numberOfStoplights = stoplights
     }
     
-    init(population: Int, stoplights: Int) {
+    init?(population: Int, stoplights: Int) {
         self.init(region: "[brak danych]", population: population, stoplights: stoplights)
     }
 }
@@ -30,5 +34,19 @@ struct Town {
 
 var myTown = Town(region: "zachód", population: 1000, stoplights: 6)
 
-myTown = Town(population: 2000, stoplights: 6)
-myTown.region
+myTown = Town(population: 0, stoplights: 6)
+myTown?.region
+let ts = myTown?.population
+
+
+struct WeightRecordInLBS {
+    let weight: Double
+    
+    init(_ pounds: Double) {
+        self.weight = pounds
+    }
+    
+    init(weightInKilos kilos: Double) {
+        self.weight = kilos * 2.20462
+    }
+}
