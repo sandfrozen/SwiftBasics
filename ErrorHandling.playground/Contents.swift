@@ -5,6 +5,7 @@ import UIKit
 enum Token {
     case Number(Int)
     case Plus
+    case Minus
 }
 
 class Lexer {
@@ -60,6 +61,9 @@ class Lexer {
             case "+":
                 tokens.append(.Plus)
                 advance()
+            case "-":
+                tokens.append(.Minus)
+                advance()
             case " ":
                 advance()
             default:
@@ -101,7 +105,8 @@ class Parser {
         switch token {
         case .Number(let value):
             return value
-        case .Plus:
+        case .Plus,
+             .Minus:
             throw theError.NieprawidłowyToken(token)
         }
     }
@@ -116,7 +121,11 @@ class Parser {
             case .Plus:
                 let nextNumber = try getNumber()
                 value += nextNumber
+            case .Minus:
+                let nextNumber = try getNumber()
+                value -= nextNumber
             case .Number:
+                print(token)
                 throw theError.NieprawidłowyToken(token)
             }
         }
@@ -127,13 +136,8 @@ class Parser {
 func evaluate(input: String) {
     print("Obliczanie: \(input)")
     let lexer = Lexer(input: input)
-    guard let tokens = try? lexer.lex() else {
-        print("Analizator uległ awari, ale <nie> wiadomo dlaczego.")
-        return
-    }
-    
     do {
-        
+        let tokens = try lexer.lex()
         //print("Dane wejściowe analizatora leksykalnego: \(tokens).")
         
         let parser = Parser(tokens: tokens)
@@ -150,5 +154,4 @@ func evaluate(input: String) {
     }
 }
 
-evaluate(input: "10 + 3 + 1")
-evaluate(input: "10 + 3 + a")
+evaluate(input: "10 + 4 3 - 14")
