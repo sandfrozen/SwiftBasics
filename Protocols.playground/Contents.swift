@@ -37,9 +37,23 @@ func printTable(dataSource: TabularDataStructure & CustomStringConvertible) {
     var firstRow: String = padding(amount: maxRowLabelWidth) + " |"
     
     var columnWidths = [Int]()
+    var columnDataMax = [Int]()
     
-    for columnLabel in columnLabels {
-        let columnHeader = " \(columnLabel) |"
+    for i in 0..<dataSource.numberOfColumns {
+        var column = [Int]()
+        for j in 0..<dataSource.numberOfRows {
+            column.append(dataSource.itemForRow(j, column: i))
+        }
+        let maximumInColumn = column.max()
+        columnDataMax.append(maximumInColumn!)
+    }
+    
+    
+    for (i, columnLabel) in columnLabels.enumerated() {
+        var columnHeader = " \(columnLabel) |"
+        if columnLabel.characters.count < columnDataMax[i].description.characters.count {
+            columnHeader = " \(columnLabel)" + padding(amount: columnDataMax[i].description.characters.count-columnLabel.characters.count) + " |"
+        }
         firstRow += columnHeader
         columnWidths.append(columnHeader.characters.count)
     }
