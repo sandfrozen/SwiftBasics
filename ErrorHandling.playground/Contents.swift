@@ -127,7 +127,10 @@ class Parser {
 func evaluate(input: String) {
     print("Obliczanie: \(input)")
     let lexer = Lexer(input: input)
-    let tokens = try! lexer.lex()
+    guard let tokens = try? lexer.lex() else {
+        print("Analizator uległ awari, ale <nie> wiadomo dlaczego.")
+        return
+    }
     
     do {
         
@@ -148,4 +151,4 @@ func evaluate(input: String) {
 }
 
 evaluate(input: "10 + 3 + 1")
-//evaluate(input: "10 + 3 + a")
+evaluate(input: "10 + 3 + a")
