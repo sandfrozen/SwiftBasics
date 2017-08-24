@@ -21,9 +21,10 @@ struct Car {
     let year: Int
     let color: String
     let nickname: String
+    let numberOfDoors: Int
     var gasLevel: Double {
         willSet {
-            precondition(newValue >= 0.0 && newValue <= 1.0, "Nowa wartość musi si mieścić w zakrecie od 0 do 1.")
+            precondition(newValue >= 0.0 && newValue <= 1.0, "Nowa wartość musi się mieścić w zakrecie od 0 do 1.")
         }
     }
 }
@@ -33,10 +34,6 @@ extension Car: VehicleType {
         return 180
     }
 
-    var numberOfDoors: Int {
-        return 4
-    }
-
     var hasFlatbed: Bool {
         return false
     }
@@ -44,12 +41,12 @@ extension Car: VehicleType {
 
 // Extension used for add init method
 extension Car {
-    init(carMake: String, carModel: String, carYear: Int) {
-        self.init(make: carMake, model: carModel, year: carYear, color: "czarny", nickname: "nie dotyczy", gasLevel: 1.0)
+    init(carMake: String, carModel: String, carYear: Int, carDoor: Int) {
+        self.init(make: carMake, model: carModel, year: carYear, color: "czarny", nickname: "nie dotyczy", numberOfDoors: carDoor, gasLevel: 1.0)
     }
 }
 
-var car = Car(carMake: "Ford", carModel: "Fusion", carYear: 2013)
+var car = Car(carMake: "Ford", carModel: "Fusion", carYear: 2013, carDoor: 2)
 
 // Extension used for add nested type
 extension Car {
@@ -80,6 +77,7 @@ car.kind.description
 extension Car {
     mutating func emptyGas(amonut: Double) {
         precondition(amonut > 0 && amonut <= 1, "Ilość do usunicia musi mieścić się w zakresie od 0 do 1.")
+        precondition(amonut <= gasLevel, "Nie możesz zużyć wiecej niż masz: \(gasLevel)")
         gasLevel -= amonut
     }
     
@@ -88,8 +86,10 @@ extension Car {
     }
 }
 
-car.emptyGas(amonut: 0.3)
+car.emptyGas(amonut: 0.5)
+car.emptyGas(amonut: 0.4)
 car.gasLevel
+
 
 // Extension of simple type
 extension Int {
