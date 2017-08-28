@@ -707,7 +707,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="478" height="207"/>
-                                            <size key="maxSize" width="478" height="10000000"/>
+                                            <size key="maxSize" width="480" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
                                     </subviews>
@@ -732,6 +732,17 @@
                                     <action selector="speakButtonClickedWithSender:" target="5gI-5U-AMq" id="6Ct-nr-gWN"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MyO-KL-1lw">
+                                <rect key="frame" x="372" y="222" width="94" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Odczytaj" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="o3E-Xw-nHJ">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="speakButtonClickedWithSender:" target="5gI-5U-AMq" id="4wc-ET-Jhr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="iPv-Lj-esE" secondAttribute="bottom" id="3lP-Vs-G6K"/>
@@ -746,6 +757,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="speakButton" destination="MyO-KL-1lw" id="1ga-Sc-2FZ"/>
+                        <outlet property="stopButton" destination="aPI-kU-bit" id="Tz5-iF-ean"/>
                         <outlet property="textView" destination="Bp8-DP-sSf" id="Xbl-fV-Zd7"/>
                     </connections>
                 </viewController>

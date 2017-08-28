@@ -13,6 +13,8 @@ class ViewController: NSViewController {
     let speechSynthesizer = NSSpeechSynthesizer()
 
     @IBOutlet var textView: NSTextView!
+    @IBOutlet weak var speakButton: NSButton!
+    @IBOutlet weak var stopButton: NSButton!
     
     var contents: String? {
         get {
@@ -24,6 +26,7 @@ class ViewController: NSViewController {
     }
     
     @IBAction func speakButtonClicked(sender: NSButton) {
+        
         if let contents = textView.string, !contents.isEmpty {
             speechSynthesizer.startSpeaking(contents)
         } else {
